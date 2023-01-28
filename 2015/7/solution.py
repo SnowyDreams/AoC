@@ -1,6 +1,5 @@
 circut = {}
 actions = []
-currentAction = ""
 
 def circutAssign(key, value):
     try:
@@ -49,7 +48,7 @@ def doAction(instruction):
             circutConnect(splitInstruction[4], splitInstruction[1], splitInstruction[0],splitInstruction[2])
 
 def runActions(booklet):
-    for action in booklet.splitlines():
+    for action in booklet:
         try:
             actions.append(action)
             doAction(action)
@@ -67,10 +66,21 @@ def runActions(booklet):
                 continue
         if actions.__len__() == 0:
             break
+    return circut.get("a")
 
 
-input = open("input.txt", "r").read()
+input = open("input.txt", "r").read().splitlines()
 
-runActions(input)
+# Part 1
+wireA = runActions(input)
+print("Wire 'a' first run: "+str(wireA))
 
-print(circut.get("a"))
+# Part 2
+for line in input:
+    if line.endswith("-> b"):
+        input[input.index(line)] = str(wireA) + " -> b"
+        
+circut.clear()
+actions.clear()
+wireB = runActions(input)
+print("Wire 'a' second run: "+str(wireB))
