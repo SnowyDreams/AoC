@@ -33,5 +33,6 @@ for route in routes:
 
 routeDist.sort()
 
-# print shortest distance
-print(routeDist[0])
+# print results
+print(f"The shortest distance possible is: {routeDist[0]}")
+print(f"The longest distance possible is: {routeDist[-1]}")
